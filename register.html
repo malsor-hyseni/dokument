@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="sq" class="h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Krijo llogari · DOKUMENT</title>
+  <meta name="description" content="Krijo llogarinë tuaj në DOKUMENT dhe organizo dokumentet personale në një vend të vetëm.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/app.css">
+  <script src="/assets/js/env.js"></script>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('dokument.theme') || 'system';
+        var d = t === 'dark' || (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (d) document.documentElement.classList.add('dark');
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="h-full font-sans antialiased">
+
+  <main class="min-h-full flex flex-col lg:grid lg:grid-cols-[1fr_minmax(0,520px)]">
+
+    <section class="hidden lg:flex flex-col justify-between p-12 xl:p-16 bg-surface border-r border-line">
+      <a href="/index.html" class="flex items-center gap-2.5 w-fit">
+        <span class="w-7 h-7 rounded-md bg-accent flex items-center justify-center text-accent-ink">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/>
+            <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
+          </svg>
+        </span>
+        <span class="text-sm font-semibold tracking-[0.16em] text-ink">DOKUMENT</span>
+      </a>
+
+      <div class="max-w-md">
+        <h1 class="text-3xl font-semibold text-ink leading-tight">
+          Filloni në më<br>pak se një minutë.
+        </h1>
+        <p class="mt-4 text-md text-ink-muted leading-7">
+          Krijoni llogarinë, ngarkoni dokumentin e parë dhe vendosni datën e skadimit.
+          DOKUMENT kujdeset për pjesën tjetër.
+        </p>
+        <ul class="mt-8 space-y-3.5" id="feature-list"></ul>
+      </div>
+
+      <p class="text-xs text-ink-subtle">
+        Të dhënat ruhen të izoluara sipas llogarisë, me Row Level Security.
+      </p>
+    </section>
+
+    <section class="flex flex-col flex-1 bg-surface-muted">
+      <header class="flex items-center justify-between p-5 lg:px-10">
+        <a href="/index.html" class="flex items-center gap-2 lg:hidden">
+          <span class="w-6 h-6 rounded bg-accent flex items-center justify-center text-accent-ink">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/>
+              <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
+            </svg>
+          </span>
+          <span class="text-xs font-semibold tracking-[0.16em] text-ink">DOKUMENT</span>
+        </a>
+        <div class="ml-auto">
+          <button type="button" id="theme-toggle" class="btn btn-ghost btn-icon btn-sm" aria-label="Ndrysho temën"></button>
+        </div>
+      </header>
+
+      <div class="flex-1 flex items-center justify-center px-5 pb-10 lg:px-10">
+        <div class="w-full max-w-[380px]">
+          <h2 class="text-2xl font-semibold text-ink">Krijo llogari</h2>
+          <p class="mt-2 text-sm text-ink-muted">
+            Keni llogari?
+            <a href="/login.html" class="link">Kyçu</a>
+          </p>
+
+          <div id="form-alert" class="mt-6" hidden></div>
+
+          <form id="register-form" class="mt-6 space-y-4" novalidate>
+            <div>
+              <label class="label" for="full_name">Emri i plotë</label>
+              <input class="input" type="text" id="full_name" name="full_name" autocomplete="name"
+                     placeholder="Arianit Krasniqi" required>
+              <span class="field-error" data-error-for="full_name" hidden></span>
+            </div>
+
+            <div>
+              <label class="label" for="email">Email</label>
+              <input class="input" type="email" id="email" name="email" autocomplete="email"
+                     placeholder="emri@shembull.com" required>
+              <span class="field-error" data-error-for="email" hidden></span>
+            </div>
+
+            <div>
+              <label class="label" for="password">Fjalëkalimi</label>
+              <div class="relative">
+                <input class="input pr-10" type="password" id="password" name="password"
+                       autocomplete="new-password" placeholder="Së paku 8 karaktere" required minlength="8">
+                <button type="button" data-toggle-password="password"
+                        class="absolute right-1.5 top-1/2 -translate-y-1/2 btn btn-ghost btn-icon btn-sm"
+                        aria-label="Shfaq fjalëkalimin"></button>
+              </div>
+              <div id="strength" class="mt-2.5" hidden>
+                <div class="flex gap-1" aria-hidden="true">
+                  <span class="h-1 flex-1 rounded-full bg-surface-inset transition-colors" data-bar="0"></span>
+                  <span class="h-1 flex-1 rounded-full bg-surface-inset transition-colors" data-bar="1"></span>
+                  <span class="h-1 flex-1 rounded-full bg-surface-inset transition-colors" data-bar="2"></span>
+                  <span class="h-1 flex-1 rounded-full bg-surface-inset transition-colors" data-bar="3"></span>
+                </div>
+                <p class="mt-1.5 text-xs text-ink-subtle" data-strength-label></p>
+              </div>
+              <span class="field-error" data-error-for="password" hidden></span>
+            </div>
+
+            <div>
+              <label class="label" for="password_confirm">Përsërit fjalëkalimin</label>
+              <input class="input" type="password" id="password_confirm" name="password_confirm"
+                     autocomplete="new-password" placeholder="••••••••" required>
+              <span class="field-error" data-error-for="password_confirm" hidden></span>
+            </div>
+
+            <label class="flex items-start gap-2.5 cursor-pointer select-none pt-1">
+              <input type="checkbox" class="checkbox mt-0.5" id="terms" required>
+              <span class="text-sm text-ink-muted leading-6">
+                Pranoj që dokumentet e mia të ruhen në këtë platformë.
+              </span>
+            </label>
+            <span class="field-error" data-error-for="terms" hidden></span>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block !mt-6" id="submit-btn">
+              Krijo llogari
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/assets/js/auth.js"></script>
+</body>
+</html>

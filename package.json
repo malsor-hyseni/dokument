@@ -1,0 +1,18 @@
+{
+  "name": "dokument",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DOKUMENT - platformë moderne për ruajtjen, organizimin dhe menaxhimin e dokumenteve personale",
+  "type": "module",
+  "scripts": {
+    "css": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/app.css --minify",
+    "css:watch": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/app.css --watch",
+    "config": "node ./scripts/build-config.mjs",
+    "build": "npm run config && npm run css",
+    "dev": "node ./scripts/dev-server.mjs",
+    "start": "node ./scripts/dev-server.mjs"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

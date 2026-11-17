@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="sq" class="h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Faqja nuk u gjet · DOKUMENT</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/app.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('dokument.theme') || 'system';
+        var d = t === 'dark' || (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (d) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="h-full font-sans antialiased bg-surface-muted">
+  <main class="min-h-full flex items-center justify-center px-5">
+    <div class="text-center max-w-md">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-surface border border-line
+                   text-ink-muted mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
+        </svg>
+      </span>
+      <h1 class="text-2xl font-semibold text-ink">Faqja nuk u gjet</h1>
+      <p class="mt-3 text-sm text-ink-muted leading-6">
+        Adresa që kërkuat nuk ekziston ose është zhvendosur.
+      </p>
+      <div class="mt-7 flex items-center justify-center gap-2">
+        <a href="/app.html" class="btn btn-primary">Hap aplikacionin</a>
+        <a href="/index.html" class="btn btn-secondary">Faqja hyrëse</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

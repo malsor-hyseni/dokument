@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="sq" class="h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DOKUMENT</title>
+  <meta name="description" content="Paneli i DOKUMENT — ruajtja, organizimi dhe menaxhimi i dokumenteve personale.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/app.css">
+  <script src="/assets/js/env.js"></script>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('dokument.theme') || 'system';
+        var d = t === 'dark' || (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (d) document.documentElement.classList.add('dark');
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="h-full font-sans antialiased overflow-hidden">
+
+  <!-- Ekrani i nisjes -->
+  <div id="boot" class="fixed inset-0 z-50 flex items-center justify-center bg-surface-muted">
+    <div class="flex flex-col items-center gap-4">
+      <span class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center text-accent-ink">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/>
+          <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
+        </svg>
+      </span>
+      <p class="text-xs text-ink-subtle tracking-[0.14em]">DOKUMENT</p>
+    </div>
+  </div>
+
+  <div id="shell" class="h-full flex" hidden>
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <div id="sidebar-backdrop" class="fixed inset-0 z-30 bg-black/40 lg:hidden" hidden></div>
+
+    <aside id="sidebar"
+           class="fixed lg:static inset-y-0 left-0 z-40 w-[248px] flex-none flex flex-col
+                  bg-surface border-r border-line -translate-x-full lg:translate-x-0
+                  transition-transform duration-200 ease-out">
+      <!-- Logo -->
+      <div class="h-14 flex items-center justify-between px-4 border-b border-line">
+        <a href="#/dashboard" class="flex items-center gap-2.5">
+          <span class="w-6 h-6 rounded bg-accent flex items-center justify-center text-accent-ink">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/>
+              <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
+            </svg>
+          </span>
+          <span class="text-xs font-semibold tracking-[0.16em] text-ink">DOKUMENT</span>
+        </a>
+        <button type="button" id="sidebar-close" class="btn btn-ghost btn-icon btn-sm lg:hidden" aria-label="Mbyll menynë"></button>
+      </div>
+
+      <!-- Butoni kryesor -->
+      <div class="p-3">
+        <button type="button" id="upload-btn" class="btn btn-primary btn-block">
+          Ngarko dokument
+        </button>
+      </div>
+
+      <!-- Navigacioni -->
+      <nav class="flex-1 overflow-y-auto px-3 pb-3 space-y-0.5" id="nav" aria-label="Navigacioni kryesor"></nav>
+
+      <!-- Hapësira -->
+      <div class="px-4 py-3 border-t border-line" id="storage-widget"></div>
+
+      <!-- Përdoruesi -->
+      <div class="p-3 border-t border-line">
+        <button type="button" id="user-menu-btn"
+                class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-surface-inset transition-colors text-left">
+        </button>
+      </div>
+    </aside>
+
+    <!-- ===================== PËRMBAJTJA ===================== -->
+    <div class="flex-1 flex flex-col min-w-0">
+
+      <!-- Topbar -->
+      <header class="h-14 flex-none flex items-center gap-3 px-4 sm:px-6 border-b border-line bg-surface">
+        <button type="button" id="sidebar-open" class="btn btn-ghost btn-icon btn-sm lg:hidden" aria-label="Hap menynë"></button>
+
+        <h1 id="page-title" class="text-sm font-semibold text-ink truncate"></h1>
+
+        <div class="flex-1"></div>
+
+        <!-- Kërkimi -->
+        <div class="relative hidden sm:block w-56 lg:w-72">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-subtle pointer-events-none text-sm"
+                id="search-icon"></span>
+          <input type="search" id="global-search" class="input !pl-9 !pr-14" placeholder="Kërko dokumente…"
+                 autocomplete="off" aria-label="Kërko dokumente">
+          <span class="absolute right-2.5 top-1/2 -translate-y-1/2 hidden lg:flex items-center gap-0.5 pointer-events-none">
+            <span class="kbd">⌘</span><span class="kbd">K</span>
+          </span>
+        </div>
+        <button type="button" id="search-mobile" class="btn btn-ghost btn-icon btn-sm sm:hidden" aria-label="Kërko"></button>
+
+        <!-- Njoftimet -->
+        <button type="button" id="bell-btn" class="btn btn-ghost btn-icon btn-sm relative" aria-label="Njoftimet">
+          <span id="bell-dot" class="absolute top-1 right-1 w-[7px] h-[7px] rounded-full bg-danger ring-2 ring-surface" hidden></span>
+        </button>
+
+        <!-- Tema -->
+        <button type="button" id="theme-toggle" class="btn btn-ghost btn-icon btn-sm" aria-label="Ndrysho temën"></button>
+      </header>
+
+      <!-- Pamja -->
+      <main id="view" class="flex-1 overflow-y-auto" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <!-- Paneli i njoftimeve -->
+  <div id="notifications-panel" class="fixed inset-0 z-50" hidden>
+    <div class="absolute inset-0 bg-black/30" data-close-panel></div>
+    <div class="absolute right-0 top-0 bottom-0 w-full sm:w-[380px] bg-surface border-l border-line
+                flex flex-col animate-slide-left">
+      <div class="h-14 flex-none flex items-center justify-between px-4 border-b border-line">
+        <h2 class="text-sm font-semibold text-ink">Njoftimet</h2>
+        <div class="flex items-center gap-1">
+          <button type="button" id="mark-all-read" class="btn btn-ghost btn-sm">Shëno si të lexuara</button>
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" data-close-panel aria-label="Mbyll"></button>
+        </div>
+      </div>
+      <div id="notifications-list" class="flex-1 overflow-y-auto"></div>
+    </div>
+  </div>
+
+  <script type="module" src="/assets/js/app.js"></script>
+</body>
+</html>

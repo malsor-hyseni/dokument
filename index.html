@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DOKUMENT · Dokumentet tuaja, të organizuara</title>
+  <meta name="description" content="DOKUMENT është platformë moderne për ruajtjen, organizimin dhe menaxhimin e dokumenteve personale — me kategori, etiketa, kërkim dhe njoftime për skadimin.">
+  <meta name="theme-color" content="#0d0e12">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="/index.html">
+  <meta property="og:title" content="DOKUMENT · Dokumentet tuaja, të organizuara">
+  <meta property="og:description" content="Platformë moderne për ruajtjen, organizimin dhe menaxhimin e dokumenteve personale.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/app.css">
+  <script src="/assets/js/env.js"></script>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('dokument.theme') || 'system';
+        var d = t === 'dark' || (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (d) document.documentElement.classList.add('dark');
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="font-sans antialiased bg-surface-muted">
+
+  <!-- ===================== NAVIGACIONI ===================== -->
+  <header class="sticky top-0 z-40 border-b border-line bg-surface-muted/85 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
+      <a href="/index.html" class="flex items-center gap-2.5">
+        <span class="w-7 h-7 rounded-md bg-accent flex items-center justify-center text-accent-ink">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/>
+            <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
+          </svg>
+        </span>
+        <span class="text-sm font-semibold tracking-[0.16em] text-ink">DOKUMENT</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7 text-sm text-ink-muted">
+        <a href="#features" class="hover:text-ink transition-colors">Funksionalitetet</a>
+        <a href="#how" class="hover:text-ink transition-colors">Si funksionon</a>
+        <a href="#security" class="hover:text-ink transition-colors">Siguria</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button type="button" id="theme-toggle" class="btn btn-ghost btn-icon btn-sm" aria-label="Ndrysho temën"></button>
+        <a href="/login.html" class="btn btn-ghost btn-sm hidden sm:inline-flex" id="nav-login">Kyçu</a>
+        <a href="/register.html" class="btn btn-primary btn-sm" id="nav-cta">Krijo llogari</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== HERO ===================== -->
+    <section class="max-w-6xl mx-auto px-5 sm:px-8 pt-20 pb-16 sm:pt-28 sm:pb-24">
+      <div class="max-w-3xl">
+        <span class="badge badge-accent mb-6">
+          <span class="dot dot-blue"></span>
+          Ndërtuar me Supabase
+        </span>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-ink leading-[1.05]">
+          Dokumentet tuaja,<br class="hidden sm:block">
+          <span class="text-ink-muted">të organizuara.</span>
+        </h1>
+        <p class="mt-6 text-lg text-ink-muted leading-8 max-w-2xl">
+          Pasaporta, patenta, kontratat, faturat dhe diplomat — në një hapësirë të vetme, private.
+          Me kategori të qarta, kërkim të menjëhershëm dhe njoftime para se të skadojnë.
+        </p>
+        <div class="mt-9 flex flex-wrap items-center gap-3">
+          <a href="/register.html" class="btn btn-primary btn-lg" id="hero-cta">
+            Fillo tani
+          </a>
+          <a href="/login.html" class="btn btn-secondary btn-lg">Kyçu në llogari</a>
+        </div>
+        <p class="mt-5 text-xs text-ink-subtle">
+          Pa karta krediti. Të dhënat ruhen në projektin tuaj Supabase.
+        </p>
+      </div>
+
+      <!-- Pamja e produktit -->
+      <div class="mt-16 sm:mt-20">
+        <div class="card overflow-hidden shadow-lg">
+          <div class="flex items-center gap-2 px-4 h-10 border-b border-line bg-surface-inset/60">
+            <span class="w-2.5 h-2.5 rounded-full bg-line-strong"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-line-strong"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-line-strong"></span>
+            <span class="ml-3 text-2xs text-ink-subtle tracking-wide">dokument.app / dokumentet</span>
+          </div>
+          <div class="grid sm:grid-cols-[180px_1fr]">
+            <div class="hidden sm:block border-r border-line p-3 space-y-1" id="preview-nav"></div>
+            <div class="p-4 sm:p-5">
+              <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" id="preview-stats"></div>
+              <div class="mt-4 rounded-lg border border-line overflow-hidden">
+                <div class="overflow-x-auto">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Dokumenti</th>
+                        <th class="hidden sm:table-cell">Kategoria</th>
+                        <th>Skadimi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="preview-rows"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FUNKSIONALITETET ===================== -->
+    <section id="features" class="border-y border-line bg-surface">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+        <div class="max-w-2xl">
+          <h2 class="text-2xl sm:text-3xl font-semibold text-ink">Gjithçka që duhet, asgjë më tepër</h2>
+          <p class="mt-4 text-md text-ink-muted leading-7">
+            Secili funksion është ndërtuar për një problem konkret: ta gjeni dokumentin shpejt
+            dhe të mos harroni afatet.
+          </p>
+        </div>
+        <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="features-grid"></div>
+      </div>
+    </section>
+
+    <!-- ===================== SI FUNKSIONON ===================== -->
+    <section id="how" class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+      <div class="max-w-2xl">
+        <h2 class="text-2xl sm:text-3xl font-semibold text-ink">Tri hapa</h2>
+        <p class="mt-4 text-md text-ink-muted leading-7">
+          Nga llogaria e re te dokumenti i organizuar, në më pak se një minutë.
+        </p>
+      </div>
+      <ol class="mt-12 grid sm:grid-cols-3 gap-6" id="steps-grid"></ol>
+    </section>
+
+    <!-- ===================== SIGURIA ===================== -->
+    <section id="security" class="border-y border-line bg-surface">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24 grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-semibold text-ink">Siguria si parim, jo si shtesë</h2>
+          <p class="mt-4 text-md text-ink-muted leading-7">
+            Dokumentet ruhen në një bucket privat. Çdo qasje kalon nëpër Row Level Security
+            në nivel databaze, që do të thotë se izolimi nuk varet nga kodi i ndërfaqes.
+          </p>
+          <a href="/register.html" class="btn btn-primary mt-8">Krijo llogarinë</a>
+        </div>
+        <ul class="space-y-4" id="security-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="max-w-6xl mx-auto px-5 sm:px-8 py-12">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div class="flex items-center gap-2.5">
+        <span class="w-6 h-6 rounded bg-accent flex items-center justify-center text-accent-ink">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/>
+            <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
+          </svg>
+        </span>
+        <span class="text-xs font-semibold tracking-[0.16em] text-ink">DOKUMENT</span>
+      </div>
+      <nav class="flex items-center gap-6 text-sm text-ink-muted">
+        <a href="/login.html" class="hover:text-ink transition-colors">Kyçu</a>
+        <a href="/register.html" class="hover:text-ink transition-colors">Krijo llogari</a>
+        <a href="#features" class="hover:text-ink transition-colors">Funksionalitetet</a>
+      </nav>
+      <p class="text-xs text-ink-subtle">HTML · Tailwind · JavaScript · Supabase</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/assets/js/landing.js"></script>
+</body>
+</html>
